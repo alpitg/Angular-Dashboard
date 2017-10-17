@@ -1,0 +1,178 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<md-card class="example-card">
+
+
+  <md-card-header>
+    <md-card-title>Add Class Information</md-card-title>
+    <!--<md-card-subtitle>Dog Breed</md-card-subtitle>-->
+  </md-card-header>
+
+
+  <div class="text-center">
+    <md-card-content>
+
+      <form [formGroup]="faddClass" (ngSubmit)="onAddClass(faddClass)" class="form-horizontal" role="form" method="POST" novalidate>
+        <div class="row">
+
+          <div class="col-sm-4">
+
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Class name" name="ClassName" formControlName="className" required>
+              <md-hint align="end" *ngIf="faddClass.get('className').hasError('required') && faddClass.get('className').touched">Required</md-hint>
+              <!--md-auto-hide="false"-->
+            </md-form-field>
+
+
+            <!--<div *ngIf="faddClass.get('className').hasError('required') && faddClass.get('className').touched"> Required </div>-->
+
+          </div>
+
+          <div class="col-sm-4">
+            <md-form-field class="example-full-width">
+              <input mdInput #maxenrollcapacity type="number" ng-pattern="/^1234$/" min="1" max="42" name="EnrollCapacity" placeholder="Enroll Capacity"
+                formControlName="enrollCapacity" required>
+              <md-hint align="end">{{maxenrollcapacity.value.length}} / 5</md-hint>
+              <md-hint align="end" *ngIf="faddClass.get('enrollCapacity').hasError('required') && faddClass.get('enrollCapacity').touched">Required</md-hint>
+
+            </md-form-field>
+
+          </div>
+
+          <div class="col-sm-4">
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Description" name="Category" formControlName="category" required>
+              <md-hint align="end" *ngIf="faddClass.get('category').hasError('required') && faddClass.get('category').touched">Required</md-hint>
+
+            </md-form-field>
+
+          </div>
+
+        </div>
+        <button [disabled]="!faddClass.valid" type="submit" md-raised-button color="primary">Save</button>
+        <button type="reset" md-raised-button color="warn">Reset</button>
+      </form>
+
+      <div class="row">
+
+        <div class="col-sm-3">
+          <form>
+            <md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+              <md-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </md-option>
+            </md-select>
+
+            <p> Selected value: {{selectedValue}} </p>
+          </form>
+
+        </div>
+        <div class="col-sm-9">
+          <section class="example-section" style=" height: 100px; display: flex; align-items: center;">
+
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Mon</md-checkbox> &nbsp;
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Tue</md-checkbox> &nbsp;
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Wed</md-checkbox> &nbsp;
+
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Thu</md-checkbox> &nbsp;
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Fri</md-checkbox> &nbsp;
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Sat</md-checkbox> &nbsp;
+
+
+          </section>
+
+          <!--<section class="example-section">
+            <md-checkbox class="example-margin" [(ngModel)]="checked" [(indeterminate)]="indeterminate" [align]="align" [disabled]="disabled">
+              I'm a checkbox
+            </md-checkbox>
+          </section>-->
+        </div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="col-sm-4">
+          <md-form-field>
+            <input mdInput [mdDatepicker]="picker" placeholder="Choose a date">
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+            <md-datepicker #picker></md-datepicker>
+          </md-form-field>
+        </div>
+
+        <div class="col-sm-4">
+          <md-form-field class="example-full-width">
+            <input mdInput #roomNo maxlength="3" placeholder="Room No">
+            <md-hint align="end">{{roomNo.value.length}} / 3</md-hint>
+          </md-form-field>
+        </div>
+
+      </div>
+
+
+
+    </md-card-content>
+  </div>
+
+
+  <div class="text-center">
+    <md-card-actions>
+      <!--<button md-button >Save</button>-->
+      <button type="submit" md-raised-button color="primary">Save</button>
+      <button type="reset" md-raised-button color="warn">Reset</button>
+    </md-card-actions>
+  </div>
+
+</md-card>
+
+
+
+
+
+
+
+<!--
+        <form class="example-form">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Company (disabled)" disabled value="Google">
+          </md-form-field>
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="First name">
+                </md-form-field>
+              </td>
+              <td>
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Long Last Name That Will Be Truncated">
+                </md-form-field>
+              </td>
+            </tr>
+          </table>
+
+
+          <table class="example-full-width" cellspacing="0">
+            <tr>
+              <td>
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="City">
+                </md-form-field>
+              </td>
+              <td>
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="State">
+                </md-form-field>
+              </td>
+              <td>
+                <md-form-field class="example-full-width">
+                  <input mdInput #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                  <md-hint align="end">{{postalCode.value.length}} / 5</md-hint>
+                </md-form-field>
+              </td>
+            </tr>
+          </table>
+        </form>-->
